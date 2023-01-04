@@ -1,0 +1,18 @@
+version: 2
+
+models:
+      - name: fact_boarding_passes
+        columns:
+            - name: pass_key
+              description: primary key for table
+              tests:
+                  - unique
+                  # - not_null
+
+      - name: fact_flights
+        columns:
+            - name: flight_id
+              description: primary key for table
+              tests:
+                  - unique
+                  - not_null

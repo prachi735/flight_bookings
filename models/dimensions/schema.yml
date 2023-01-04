@@ -1,0 +1,69 @@
+version: 2
+
+models:
+
+  - name: dim_aircrafts
+    description: this table contains information about airports
+    columns: 
+      - name: aircraft_seat_key
+        description: primary key column
+        tests:
+          - unique
+          - not_null 
+
+  - name: dim_airports
+    description: this table contains information about airports
+    columns: 
+      - name: airport_code
+        description: primary key column
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_boarding_passes
+    columns: 
+      - name: bp_id
+        description: primary key column
+        tests:
+          - unique
+          - not_null 
+
+  - name: dim_flights
+    description: this table contains information about flights
+    columns: 
+      - name: flight_id
+        description: primary key column
+        tests:
+          - unique
+          - not_null 
+      - name: status
+        tests:
+          - accepted_values:
+              values: ['On Time', 'Delayed', 'Departed','Arrived', 'Scheduled', 'Cancelled']
+
+  - name: dim_ticket_flights
+    description: this table contains information about flights
+    columns: 
+      - name: tf_id
+        description: primary key column
+        tests:
+          - unique
+          - not_null 
+      # - name: scheduled_arrival
+      #   tests:
+      #     - check_schedule
+
+sources:
+  - name: bookings_data
+    database: bookings_info
+    schema: bookings
+    tables:
+     - name: aircrafts_data
+     - name: airports_data
+     - name: seats
+     - name: flights_v
+     - name: boarding_passes
+    #  - name: bookings
+     - name: ticket_flights
+    #  - name: tickets
+    #  - name: routes
